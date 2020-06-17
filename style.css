@@ -1,0 +1,24 @@
+body {
+    background-color: rgb(46, 137, 190);
+}
+
+.navbar .navbar {
+    background-color: rgb(17, 58, 119);
+    color: #fff;
+}
+
+#heading {
+    background-color: rgb(17, 58, 119);
+    color: #fff;
+}
+
+.form-group h1 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.col-sm-3 {
+    background-color: #fff;
+    padding: 10px;
+    margin: 15px;
+}

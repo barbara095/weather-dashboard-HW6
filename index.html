@@ -1,37 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /><link>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link>
+    <link rel="stylesheet" href="style.css">
+    </link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </link>
 </head>
 
+
+
 <body>
-    
+    <header>
+        <nav class="navbar navbar-light bg-light" id="heading">
+            <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
+        </nav>
+    </header>
+
     <div class="container">
-        <div class="header">
-            <h1>Weather Dashboard</h1>
+        <div class="row">
+            <div class="col-sm-3">
+                <form>
+                    <div class="form-group">
+                        <h1>Search for a city:</h1>
+                        <form class="search" action="action_page.php">
+                            <input type="text" placeholder="Search.." name="search" id="city-input">
+                            <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <ul class="list-cities" id="show-cities">
+                    </ul>
+
+                    <div class="row justify-content-center button-div">
+                        <button class="btn btn-danger clear" type="button" id="clear-cities">Clear search history</button>
+                    </div>
+            </div>
+
+            <div class="cols-sm-9">
+                <div class="col-sm-6 current-forecast">
+                    <div class="current-conditions">
+                    </div>
+                        <div class="col-sm-6 future-forecast">
+                            <div class="future-conditions">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    <form>
-        <div class="form-group">
-          <form class="search" action="action_page.php">
-            <input type="text" placeholder="Search.." name="search" id="city-input">
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-
-        <div id="city-form"></div>
-
-
-
-
-    </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="./script.js"></script>
 
 </body>
+
 </html>
