@@ -7,6 +7,10 @@ body {
     color: #fff;
 }
 
+.container {
+    background-color: #fff;
+}
+
 #heading {
     background-color: rgb(17, 58, 119);
     color: #fff;
@@ -21,4 +25,16 @@ body {
     background-color: #fff;
     padding: 10px;
     margin: 15px;
+}
+
+.current-conditions {
+    float: left;
+    background-color: #fff;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.display-current-weather {
+    font-size: 20px;
+    font-weight: 700;
 }
