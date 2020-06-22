@@ -29,12 +29,18 @@ body {
 
 .current-conditions {
     float: left;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     font-size: 18px;
     padding: 10px;
 }
+
 
 .display-current-weather {
     font-size: 20px;
     font-weight: 700;
 }
+
+.cols-sm-9 {
+    background-color: dodgerblue;
+}
+
