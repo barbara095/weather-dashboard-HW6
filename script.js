@@ -1,8 +1,9 @@
 $(document).ready(function () {
     // HTML variables
 
-    var currentDate = moment().format("dddd, MMMM, Do");
+    var currentDate = moment().format("dddd, MMMM, Do YYYY, h:mma");
     var listCities = $("#show-cities");
+    var searchList = $("<div>");
     var currentWeather = $(".current-conditions");
     var currentWeatherDiv = $("<div>");
     var weatherHeading = $("<h1>");
@@ -26,11 +27,24 @@ $(document).ready(function () {
 
     var APIKey = "3faa5d1f7e1b0157f518296126002213";
 
-
     $("#submit").on("click", function (event) {
         event.preventDefault();
+        searchedCities();
+
+        function searchedCities() {
+            if (searchedCitiesArray.length !== 0) {
+                listCities.html("");
+            }
+            for (var i = 0; i < searchedCitiesArray.length; i++) {
+                city = searchedCitiesArray[i];
+
+                searchList.attr("class", "list-cities").text(city[i]);
+                listCities.append(searchList);
+            }
+        };
 
         city = $("#city-input").val();
+
 
         if (city !== "") {
             $.ajax({
@@ -70,34 +84,35 @@ $(document).ready(function () {
                 currentWeatherDiv.append(humidityDiv);
                 currentWeatherDiv.append(windSpeedDiv);
 
-            // Retrieve UV Index
-            $.ajax({
-                url: "https://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + APIKey + "&lat=" 
-                + cityLat + "&lon=" + cityLon,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
-                uvIndex = response[0].value;
+                // Retrieve UV Index
+                $.ajax({
+                    url: "https://api.openweathermap.org/data/2.5/uvi/forecast?appid=" + APIKey + "&lat="
+                        + cityLat + "&lon=" + cityLon,
+                    method: "GET"
+                }).then(function (response) {
+                    console.log(response);
+                    uvIndex = response[0].value;
 
-                // Change colour of UV index according to level of severity
-                if ((uvIndex) >= 0 && (uvIndex) <= 2) {
-                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Favourable)").css('color', 'green', 'font-weight', 'bolder');
-                    currentWeatherDiv.append(uvIndexDiv);
-                } else if ((uvIndex) >= 2 && (uvIndex) <= 5) {
-                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Moderate)").css('color', 'sandybrown');
-                    currentWeatherDiv.append(uvIndexDiv);
-                } else if ((uvIndex) >= 5 && (uvIndex) <= 7) {
-                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (High)").css('color', 'orange');
-                    currentWeatherDiv.append(uvIndexDiv);
-                } else if ((uvIndex) >= 7 && (uvIndex) <= 10) {
+                    // Change colour of UV index according to level of severity
+                    if ((uvIndex) <= 2) {
+                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Favourable)").css('color', 'green', 'font-weight', 'bolder');
+                        currentWeatherDiv.append(uvIndexDiv);
+                    } else if ((uvIndex) >= 2 && (uvIndex) <= 5) {
+                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Moderate)").css('color', 'sandybrown');
+                        currentWeatherDiv.append(uvIndexDiv);
+                    } else if ((uvIndex) >= 5 && (uvIndex) <= 7) {
+                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (High)").css('color', 'orange');
+                        currentWeatherDiv.append(uvIndexDiv);
+                    } else if ((uvIndex) >= 7 && (uvIndex) <= 10) {
                         uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Severe)").css('color', 'red');
                         currentWeatherDiv.append(uvIndexDiv);
-                } else if ((uvIndex) > 10) {
-                            uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Extreme)").css('color', 'maroon');
-                            currentWeatherDiv.append(uvIndexDiv);
-                }
-            })
-            
+                    } else if ((uvIndex) > 10) {
+                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Extreme)").css('color', 'maroon');
+                        currentWeatherDiv.append(uvIndexDiv);
+                    }
+                })
+        
+
             })
             // Call 5 day forecast
             $.ajax({
@@ -107,31 +122,18 @@ $(document).ready(function () {
                 console.log(response.list.slice(0, 5));
 
             })
-    
-        
+            
+            
+
         }
     })
 
-    function searchedCities() {
-                if (searchedCitiesArray.length !== 0) {
-                    listCities.html("");
-                }
-                for (var i = 0; i < searchedCitiesArray.length; i++) {
-                    city = searchedCitiesArray[i];
+    function clearSearchHistory() {
 
-                    var searchList = $("<li>").attr("class", "list-cities").data('index', i);
-                    listCities.append(searchList);
-                }
-
-            };
-
-        function clearSearchHistory() {
-
-            searchedCitiesArray = [];
-            listCities.text("");
-            localStorage.clear();
-
-        };
+        searchedCitiesArray = [];
+        listCities.text("");
+        localStorage.clear();
+    };
 
     function init() {
 
@@ -139,20 +141,19 @@ $(document).ready(function () {
         if (storedCities !== null) {
             searchedCitiesArray = storedCities;
         }
-
-        searchedCities();
     };
 
     function locallyStoredCities() {
-        // Stringify and set "cities" key in localStorage to recentlySearchedCitiesArray
-        localStorage.setItem("cities", JSON.stringify(searchedCitiesArray));
+        // Stringify and set "cities" key in localStorage to searchedCitiesArray
+        localStorage.setItem("city", JSON.stringify(searchedCitiesArray));
     }
 
 
     clearCities.on("click", function (event) {
-        event.preventDefault();
         clearSearchHistory();
-        citySearch = ("");
+        listCities = ("");
     });
+
+
 })
 
