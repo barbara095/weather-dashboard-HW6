@@ -2,18 +2,13 @@ body {
     background-color: rgb(120, 182, 218);
 }
 
-.navbar .navbar {
+.navbar {
     background-color: rgb(17, 58, 119);
     color: #fff;
 }
 
 .container {
     background-color: #fff;
-}
-
-#heading {
-    background-color: rgb(17, 58, 119);
-    color: #fff;
 }
 
 .form-group h1 {
@@ -32,6 +27,7 @@ body {
     background-color: rgb(255, 255, 255);
     font-size: 18px;
     padding: 10px;
+    color: ;
 }
 
 
@@ -39,8 +35,3 @@ body {
     font-size: 20px;
     font-weight: 700;
 }
-
-.cols-sm-9 {
-    background-color: dodgerblue;
-}
-

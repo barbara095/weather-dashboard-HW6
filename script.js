@@ -75,12 +75,29 @@ $(document).ready(function () {
                 + cityLat + "&lon=" + cityLon,
                 method: "GET"
             }).then(function (response) {
-                uvIndex = response.value;
-                
-                uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + (Math.round(uvIndex)));
-                
-                currentWeatherDiv.append(uvIndexDiv);
+                console.log(response);
+                uvIndex = response[0].value;
+
+                // Change colour of UV index according to level of severity
+                if ((uvIndex) >= 0 && (uvIndex) <= 2) {
+                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'green');
+                    currentWeatherDiv.append(uvIndexDiv);
+                } else if ((uvIndex) >= 2 && (uvIndex) <= 5) {
+                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'sandybrown');
+                    currentWeatherDiv.append(uvIndexDiv);
+                } else if ((uvIndex) >= 5 && (uvIndex) <= 7) {
+                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'orange');
+                    currentWeatherDiv.append(uvIndexDiv);
+                } else if ((uvIndex) >= 7 && (uvIndex) <= 10) {
+                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'red');
+                        currentWeatherDiv.append(uvIndexDiv);
+                } else if ((uvIndex) > 10) {
+                            uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'maroon');
+                            currentWeatherDiv.append(uvIndexDiv);
+                }
+            })
             
+            })
             // Call 5 day forecast
             $.ajax({
                 url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric" + "&appid=" + APIKey,
@@ -89,51 +106,52 @@ $(document).ready(function () {
                 console.log(response.list);
 
             })
-            
-            })
-        })
-    }
+    
+        
+        }
     })
-        function searchedCities() {
-                    if (searchedCitiesArray.length !== 0) {
-                        listCities.html("");
-                    }
-                    for (var i = 0; i < searchedCitiesArray.length; i++) {
-                        city = searchedCitiesArray[i];
 
-                        var searchList = $("<li>").attr("class", "list-cities").data('index', i);
-                        listCities.append(searchList);
-                    }
+    function searchedCities() {
+                if (searchedCitiesArray.length !== 0) {
+                    listCities.html("");
+                }
+                for (var i = 0; i < searchedCitiesArray.length; i++) {
+                    city = searchedCitiesArray[i];
 
-                };
-
-            function clearSearchHistory() {
-
-                searchedCitiesArray = [];
-                listCities.text("");
-                localStorage.clear();
+                    var searchList = $("<li>").attr("class", "list-cities").data('index', i);
+                    listCities.append(searchList);
+                }
 
             };
 
-        function init() {
+        function clearSearchHistory() {
 
-            var storedCities = JSON.parse(localStorage.getItem('cities'));
-            if (storedCities !== null) {
-                searchedCitiesArray = storedCities;
-            }
+            searchedCitiesArray = [];
+            listCities.text("");
+            localStorage.clear();
 
-            searchedCities();
         };
 
-        function locallyStoredCities() {
-            // Stringify and set "cities" key in localStorage to recentlySearchedCitiesArray
-            localStorage.setItem("cities", JSON.stringify(searchedCitiesArray));
+    function init() {
+
+        var storedCities = JSON.parse(localStorage.getItem('cities'));
+        if (storedCities !== null) {
+            searchedCitiesArray = storedCities;
         }
 
+        searchedCities();
+    };
 
-        clearCities.on("click", function (event) {
-            event.preventDefault();
-            clearSearchHistory();
-            citySearch = ("");
-        });
-    })
+    function locallyStoredCities() {
+        // Stringify and set "cities" key in localStorage to recentlySearchedCitiesArray
+        localStorage.setItem("cities", JSON.stringify(searchedCitiesArray));
+    }
+
+
+    clearCities.on("click", function (event) {
+        event.preventDefault();
+        clearSearchHistory();
+        citySearch = ("");
+    });
+})
+
