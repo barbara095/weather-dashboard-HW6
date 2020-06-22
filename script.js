@@ -65,7 +65,7 @@ $(document).ready(function () {
                 // Assign classes and attributes to tags to append afterwards
                 currentWeatherDiv.attr('class', 'display-current-ul');
                 dateDiv.attr('class', 'display date');
-                weatherHeading.attr('class', 'display-current-weather').text(city + " " + "|" + currentDate);
+                weatherHeading.attr('class', 'display-current-weather').text("Today's forecast for: " + city + " " + "|" + currentDate);
                 weatherIconDiv.attr('src', "http://openweathermap.org/img/w/" + weatherIcon + ".png");
                 tempDiv.attr('class', 'display current temp').text("Current temperature: " + currentTemp + "°");
                 minTemp.attr('class', 'display min temp').text("Minimum temperature: " + tempMin + "°");
