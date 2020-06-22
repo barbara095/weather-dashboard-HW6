@@ -8,6 +8,7 @@ $(document).ready(function () {
     var weatherHeading = $("<h1>");
     var weatherIconDiv = $("<img>");
     var forecastDiv = $(".future-forecast");
+    var forecastEl = $("<div>");
     var dateDiv = $("<div>");
     var tempDiv = $("<div>");
     var minTemp = $("<div>");
@@ -80,19 +81,19 @@ $(document).ready(function () {
 
                 // Change colour of UV index according to level of severity
                 if ((uvIndex) >= 0 && (uvIndex) <= 2) {
-                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'green');
+                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Favourable)").css('color', 'green', 'font-weight', 'bolder');
                     currentWeatherDiv.append(uvIndexDiv);
                 } else if ((uvIndex) >= 2 && (uvIndex) <= 5) {
-                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'sandybrown');
+                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Moderate)").css('color', 'sandybrown');
                     currentWeatherDiv.append(uvIndexDiv);
                 } else if ((uvIndex) >= 5 && (uvIndex) <= 7) {
-                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'orange');
+                    uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (High)").css('color', 'orange');
                     currentWeatherDiv.append(uvIndexDiv);
                 } else if ((uvIndex) >= 7 && (uvIndex) <= 10) {
-                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'red');
+                        uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Severe)").css('color', 'red');
                         currentWeatherDiv.append(uvIndexDiv);
                 } else if ((uvIndex) > 10) {
-                            uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex).css('color', 'maroon');
+                            uvIndexDiv.attr('class', 'display-UV-index').text("UV Index: " + uvIndex + " (Extreme)").css('color', 'maroon');
                             currentWeatherDiv.append(uvIndexDiv);
                 }
             })
@@ -100,10 +101,10 @@ $(document).ready(function () {
             })
             // Call 5 day forecast
             $.ajax({
-                url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric" + "&appid=" + APIKey,
+                url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + APIKey,
                 method: "GET"
             }).then(function (response) {
-                console.log(response.list);
+                console.log(response.list.slice(0, 5));
 
             })
     
