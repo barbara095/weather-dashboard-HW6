@@ -117,15 +117,52 @@ $(document).ready(function () {
             // Call 5 day forecast
             $.ajax({
                 url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=" + APIKey,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response.list.slice(0, 5));
+                method: "GET",
+                data: {
+                    q: city,
+                    units: "metric",
+                    cnt: "5",
+                  },
+            }).then(function (data) {
+                console.log('Received data:', data);
+                forecastEl = "";
+                forecastEl = $("<div>").attr("class","col-sm-3 forecast");
+                forecastEl += "<h2>" + " 5 day forecast for " + data.city.name + "</h2>";
+                
+                $.each(data.list, function(index,val) {
+                    forecastEl += "<b>Day " + index + "</b>: ";
+                    forecastEl += val.main.temp + "°";
+                    forecastEl += "<span> | " + val.weather[0].description + "</span>";
+                    forecastEl += "<span> | " + val.weather[0].description + "</span>";
+                    forecastEl += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>";
+                    forecastEl += "</p>"
+                })
 
+                forecastDiv.append(forecastEl);
             })
-            
-            
+        
 
         }
+        
+        function setForecastDate(index) {
+            if (index === 7) {
+              var dateOne = moment().add(1,'days').format("MMMM Do");
+              return dateOne;
+            } else if (index === 14) {
+              var dateTwo = moment().add(2,'days').format("MMMM Do");
+              return dateTwo;
+            } else if (index === 21) {
+              var dateTwo = moment().add(3,'days').format("MMMM Do");
+              return dateTwo;
+            } else if (index === 28) {
+              var dateTwo = moment().add(4,'days').format("MMMM Do");
+              return dateTwo;
+            } else if (index === 35) {
+              var dateTwo = moment().add(5,'days').format("MMMM Do");
+              return dateTwo;
+            }
+          }
+        
     })
 
     function clearSearchHistory() {
