@@ -111,7 +111,7 @@ $(document).ready(function () {
                         currentWeatherDiv.append(uvIndexDiv);
                     }
                 })
-        
+
 
             })
             // Call 5 day forecast
@@ -122,47 +122,26 @@ $(document).ready(function () {
                     q: city,
                     units: "metric",
                     cnt: "5",
-                  },
+                },
             }).then(function (data) {
                 console.log('Received data:', data);
                 forecastEl = "";
                 forecastEl += "<h2>" + " 5 day forecast for " + data.city.name + "</h2>";
-                
-                $.each(data.list, function(index,val) {
+
+                $.each(data.list, function (index, val) {
                     forecastEl += "<b>Day " + index + "</b>: ";
                     forecastEl += Math.round(val.main.temp) + "°";
                     forecastEl += "<span> | " + val.weather[0].description + "</span>";
                     forecastEl += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>";
                     forecastEl += "<div> | " + "Wind speed: " + val.wind.speed + "kmph" + "</div>";
-                    forecastEl += "<div> | " + "Humidity: "+ val.main.humidity + "%" + "</div>";
+                    forecastEl += "<div> | " + "Humidity: " + val.main.humidity + "%" + "</div>";
                     forecastEl += "</p>"
                 })
 
                 forecastDiv.append(forecastEl);
             })
-        
-
         }
-        
-        function setForecastDate(index) {
-            if (index === 7) {
-              var dateOne = moment().add(1,'days').format("MMMM Do");
-              return dateOne;
-            } else if (index === 14) {
-              var dateTwo = moment().add(2,'days').format("MMMM Do");
-              return dateTwo;
-            } else if (index === 21) {
-              var dateTwo = moment().add(3,'days').format("MMMM Do");
-              return dateTwo;
-            } else if (index === 28) {
-              var dateTwo = moment().add(4,'days').format("MMMM Do");
-              return dateTwo;
-            } else if (index === 35) {
-              var dateTwo = moment().add(5,'days').format("MMMM Do");
-              return dateTwo;
-            }
-          }
-        
+
     })
 
     function clearSearchHistory() {
