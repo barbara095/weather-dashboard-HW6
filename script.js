@@ -126,15 +126,15 @@ $(document).ready(function () {
             }).then(function (data) {
                 console.log('Received data:', data);
                 forecastEl = "";
-                forecastEl = $("<div>").attr("class","col-sm-3 forecast");
                 forecastEl += "<h2>" + " 5 day forecast for " + data.city.name + "</h2>";
                 
                 $.each(data.list, function(index,val) {
                     forecastEl += "<b>Day " + index + "</b>: ";
-                    forecastEl += val.main.temp + "°";
-                    forecastEl += "<span> | " + val.weather[0].description + "</span>";
+                    forecastEl += Math.round(val.main.temp) + "°";
                     forecastEl += "<span> | " + val.weather[0].description + "</span>";
                     forecastEl += "<img src='https://openweathermap.org/img/w/" + val.weather[0].icon + ".png'>";
+                    forecastEl += "<div> | " + "Wind speed: " + val.wind.speed + "kmph" + "</div>";
+                    forecastEl += "<div> | " + "Humidity: "+ val.main.humidity + "%" + "</div>";
                     forecastEl += "</p>"
                 })
 
