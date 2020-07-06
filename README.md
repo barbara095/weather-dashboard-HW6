@@ -1,4 +1,4 @@
-# weather-dashboard-HW6
+# Weather-dashboard-HW6
 
 This application is designed to assist travellers in planning their trip based on current and future weather conditions.
 
@@ -10,6 +10,7 @@ When I am shown the UV index, the value is colour coded according to the severit
 
 I am also presented with a 5 day forecast which shows me the same weather attributes. 
 
+<<<<<<< HEAD
 Deployed application: https://barbara095.github.io/weather-dashboard-HW6/
 
 ![Desktop version](https://github.com/barbara095/weather-dashboard-HW6/blob/master/Assets/images/weather.png?)
