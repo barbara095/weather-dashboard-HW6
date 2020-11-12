@@ -2,60 +2,54 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /><link>
-    <link rel="stylesheet" href="css/style.css"></link>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </link>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Weather Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<link>
+	<link rel="stylesheet" href="css/style.css">
+	</link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</link>
 </head>
 
 
 
 <body>
-    <header>
-        <nav class="navbar navbar-light bg-light" id="heading">
-            <span class="navbar-brand mb-0 h1" href="./index.html">Weather Dashboard</span>
-        </nav>
-    </header>
+	<header>
+		<nav class="navbar navbar-dark bg-dark" id="weather-heading">
+			<span class="navbar-brand mb-0 h1" href="./index.html">Weather Dashboard</span>
+		</nav>
+	</header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <form>
-                    <div class="form-group">
-                        <h1>Search for a city:</h1>
-                        <form class="search" action="action_page.php">
-                            <input type="text" placeholder="Search.." name="search" id="city-input">
-                            <button type="submit" id="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    
-                    <div class="row justify-content-center button-div">
-                        <button class="btn btn-danger clear" type="submit" id="clear-cities">Clear search history</button>
-                    </div>
-                    <br>
-                    <div class="list-cities" id="show-cities">
-                    </div>
-                </div>
-           
-            <div class="cols-sm-9">
-                <div class="current-forecast">
-                    <div class="current-conditions"></div>
-                        <div class="future-forecast">
-                            <div class="future-conditions">
-                           
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
- 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="js/script.js"></script>
+	<div class="container">
+		<form>
+			<div class="jumbotron">
+				<h1 class="search-heading">Search for a city:</h1>
+				<div class="search-bar" action="action_page.php">
+					<input type="text" class="search-input" placeholder="Enter city name.." name="search" id="city-input">
+					<button class="btn btn-success clear" type="submit" id="submit"><i class="fa fa-search"></i></button>
+					<button class="btn btn-danger clear" type="submit" id="clear-cities">Clear search history</button>
+				</div>
+			</div>
+
+			<div class="list-cities" id="show-cities">
+			</div>
+
+			<div class="cols-sm-10">
+				<div class="current-forecast">
+				</div>
+					<div class="current-conditions"></div>
+					<div class="future-forecast"></div>
+					<div class="future-conditions"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script src="js/script.js"></script>
 
 </body>
 
