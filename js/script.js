@@ -2,7 +2,6 @@ $(document).ready(function () {
 	// HTML variables
 	var currentDate = moment().format("dddd, MMMM, Do YYYY, h:mma");
 	var listCities = $("#show-cities");
-	var searchList = $("<div>");
 	var currentWeather = $(".current-conditions");
 	var currentWeatherDiv = $("<div>");
 	var weatherHeading = $("<h1>");
@@ -22,28 +21,16 @@ $(document).ready(function () {
 	// Array Variables
 
 	var searchedCitiesArray = [];
-	var city = [];
+	var city = "";
 
 	var APIKey = "3faa5d1f7e1b0157f518296126002213";
 
-	$("#submit").on("click", function (event) {
+	$("#submit").on("click", event => {
 		event.preventDefault();
-		searchedCities();
-
-		function searchedCities() {
-			if (searchedCitiesArray.length !== 0) {
-				listCities.html("");
-			}
-			for (var i = 0; i < searchedCitiesArray.length; i++) {
-				city = searchedCitiesArray[i];
-
-				searchList.attr("class", "list-cities").text(city[i]);
-				listCities.append(searchList);
-			}
-		};
 
 		city = $("#city-input").val();
-
+		localStorage.setItem("city", JSON.stringify(city));
+		
 		$.ajax({
 			url: "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + APIKey,
 			method: "GET"
@@ -51,14 +38,15 @@ $(document).ready(function () {
 		.then(response => {
 			// Pull through weather attributes from API
 			console.log(response);
-			currentTemp = Math.floor(response.main.temp);
-			tempMax = Math.floor(response.main.temp_max);
-			tempMin = Math.floor(response.main.temp_min);
-			weatherIcon = response.weather[0].icon;
-			currentHumidity = response.main.humidity;
-			currentWindSpeed = response.wind.speed;
-			cityLat = response.coord.lat;
-			cityLon = response.coord.lon;
+
+			const currentTemp = Math.floor(response.main.temp);
+			const tempMax = Math.floor(response.main.temp_max);
+			const tempMin = Math.floor(response.main.temp_min);
+			const weatherIcon = response.weather[0].icon;
+			const currentHumidity = response.main.humidity;
+			const currentWindSpeed = response.wind.speed;
+			const cityLat = response.coord.lat;
+			const cityLon = response.coord.lon;
 
 			// Assign classes and attributes to tags to append afterwards
 			currentWeatherDiv.attr('class', 'display-current-ul');
@@ -75,7 +63,6 @@ $(document).ready(function () {
 			currentWeather.append(currentWeatherDiv);
 			currentWeatherDiv
 				.append(dateDiv, weatherHeading, weatherIconDiv, tempDiv, minTemp, maxTemp, humidityDiv, windSpeedDiv);
-			
 
 			// Retrieve UV Index
 			$.ajax({
@@ -138,7 +125,6 @@ $(document).ready(function () {
 
 	
 	})
-
 
 	function clearSearchHistory() {
 		searchedCitiesArray = [];
